@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.appregistro.controller.EquipoController">
+
+    <!-- ===== Título ===== -->
+    <top>
+        <Label text="Control de equipos de laboratorio" BorderPane.alignment="CENTER">
+            <font><Font name="System Bold" size="20"/></font>
+            <BorderPane.margin><Insets top="12" bottom="8"/></BorderPane.margin>
+        </Label>
+    </top>
+
+    <!-- ===== Formulario (izquierda) ===== -->
+    <left>
+        <VBox spacing="10" prefWidth="300">
+            <padding><Insets top="10" right="10" bottom="10" left="14"/></padding>
+
+            <Label text="Datos del equipo"><font><Font name="System Bold" size="14"/></font></Label>
+
+            <GridPane hgap="8" vgap="8">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="70"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="ID:" GridPane.rowIndex="0"/>
+                <Label fx:id="lblId" text="(nuevo)" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Código:" GridPane.rowIndex="1"/>
+                <TextField fx:id="txtCodigo" promptText="Ej. PC-010" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Nombre:" GridPane.rowIndex="2"/>
+                <TextField fx:id="txtNombre" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Marca:" GridPane.rowIndex="3"/>
+                <TextField fx:id="txtMarca" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Cantidad:" GridPane.rowIndex="4"/>
+                <TextField fx:id="txtCantidad" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Tipo:" GridPane.rowIndex="5"/>
+                <ComboBox fx:id="cmbTipo" promptText="Seleccione tipo" maxWidth="Infinity"
+                          GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Estado:" GridPane.rowIndex="6"/>
+                <ComboBox fx:id="cmbEstado" promptText="Seleccione estado" maxWidth="Infinity"
+                          GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="8">
+                <Button fx:id="btnGuardar" text="Guardar" onAction="#onGuardar" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="8">
+                <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+        </VBox>
+    </left>
+
+    <!-- ===== Búsqueda + tabla (centro) ===== -->
+    <center>
+        <VBox spacing="10">
+            <padding><Insets top="10" right="14" bottom="14" left="6"/></padding>
+
+            <HBox spacing="8">
+                <TextField fx:id="txtBuscar" promptText="Buscar por nombre..." HBox.hgrow="ALWAYS"
+                           onAction="#onBuscar"/>
+                <ComboBox fx:id="cmbFiltroTipo" promptText="Filtrar por tipo" prefWidth="170"/>
+                <Button fx:id="btnBuscar" text="Buscar / Aplicar filtros" onAction="#onBuscar"/>
+                <Button fx:id="btnQuitarFiltros" text="Quitar filtros" onAction="#onQuitarFiltros"/>
+            </HBox>
+
+            <TableView fx:id="tblEquipos" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colCodigo" text="Código" prefWidth="80"/>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="190"/>
+                    <TableColumn fx:id="colMarca" text="Marca" prefWidth="90"/>
+                    <TableColumn fx:id="colEstado" text="Estado" prefWidth="120"/>
+                    <TableColumn fx:id="colCantidad" text="Cantidad" prefWidth="70"/>
+                    <TableColumn fx:id="colTipo" text="Tipo" prefWidth="110"/>
+                </columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
